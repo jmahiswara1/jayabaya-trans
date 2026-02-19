@@ -52,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${plusJakarta.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body className="font-body antialiased">{children}</body>
     </html>
   );
 }
