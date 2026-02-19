@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jayabaya Rent
 
-## Getting Started
+Website sewa mobil modern untuk **Jayabaya Rent**, penyedia jasa rental kendaraan yang berlokasi di Pare, Kabupaten Kediri, Jawa Timur. Dibangun sebagai aplikasi frontend-only berbasis Next.js dengan fokus pada performa, SEO, dan kemudahan pemesanan melalui WhatsApp.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Deskripsi
+
+Jayabaya Rent hadir untuk mempermudah masyarakat, wisatawan, pelajar Kampung Inggris, dan pelaku bisnis lokal dalam menemukan dan memesan kendaraan sewa yang sesuai kebutuhan. Proses pemesanan dilakukan sepenuhnya melalui WhatsApp tanpa memerlukan akun atau login.
+
+---
+
+## Tech Stack
+
+| Layer | Teknologi |
+|---|---|
+| Framework | Next.js 14 (App Router, SSG) |
+| Bahasa | TypeScript |
+| Styling | Tailwind CSS v3 |
+| Animasi | Framer Motion |
+| Ikon | Lucide React |
+| Gambar | Next/Image + Unsplash |
+| Form | React Hook Form |
+| State Global | Zustand (fitur bandingkan mobil) |
+| Font | Plus Jakarta Sans + Inter (Google Fonts) |
+| Deploy | Vercel |
+
+---
+
+## Fitur
+
+### Halaman
+
+- **Beranda** — Hero section, keunggulan layanan, cara sewa, testimoni, dan CTA
+- **Katalog** — Daftar 20 kendaraan dengan filter tipe/transmisi/kapasitas, pencarian, dan pengurutan
+- **Detail Mobil** — Galeri foto, spesifikasi lengkap, form pemesanan terintegrasi WA
+- **Bandingkan** — Pilih hingga 3 mobil, bandingkan spesifikasi secara berdampingan
+- **Pemesanan** — Form pemesanan lengkap, dikirim otomatis ke WhatsApp
+- **Tentang Kami** — Sejarah, statistik, dan keunggulan layanan
+- **FAQ** — Pertanyaan umum dengan navigasi per kategori
+- **Kontak** — Informasi kontak, embed Google Maps, dan form pesan cepat
+- **Promo** — Paket sewa spesial dengan harga dan detail layanan
+- **Area Layanan** — Kota yang dilayani, biaya antar luar kota, destinasi populer
+- **Syarat dan Ketentuan** — Dokumen yang diperlukan, aturan, pembayaran, dan denda
+
+### Teknis
+
+- Seluruh halaman di-render secara statis (SSG) untuk performa optimal
+- SEO metadata per halaman (title, description, Open Graph)
+- Desain responsif untuk mobile, tablet, dan desktop
+- Animasi halus menggunakan Framer Motion
+- Integrasi WhatsApp dengan pesan terformat otomatis
+- URL parameter untuk filter katalog yang dapat dibagikan
+- Komponen mengikuti pola Atomic Design
+
+---
+
+## Struktur Proyek
+
+```
+app/
+  (route pages)/
+components/
+  atoms/
+  molecules/
+  organisms/
+  layout/
+data/
+  cars.ts
+  faq.ts
+  promos.ts
+lib/
+  animations.ts
+  compareStore.ts
+  constants.ts
+  utils.ts
+  whatsapp.ts
+public/
+  images/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Menjalankan Secara Lokal
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Install dependensi
+npm install
 
-## Learn More
+# Jalankan development server
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build production
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Pengembangan Selanjutnya
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Integrasi backend untuk manajemen armada dan pemesanan
+- Panel admin untuk memperbarui data kendaraan, promo, dan area
+- Notifikasi otomatis via WhatsApp Business API
+- Halaman ulasan pelanggan dengan integrasi Google Reviews
+- Pelacakan ketersediaan unit secara real-time
+- Progressive Web App (PWA) untuk pengalaman mobile yang lebih baik
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Lisensi
+
+Proyek ini dikembangkan untuk keperluan internal Jayabaya Rent. Seluruh hak cipta dilindungi.
