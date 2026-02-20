@@ -8,10 +8,13 @@
  */
 
 import { useForm } from "react-hook-form";
-import { CalendarDays, MapPin, User, Phone as PhoneIcon, Send } from "lucide-react";
+import { MapPin, User, Phone as PhoneIcon, Send } from "lucide-react";
+import { format } from "date-fns";
+import type { DateRange } from "react-day-picker";
 import Input from "@/components/atoms/Input";
 import Textarea from "@/components/atoms/Textarea";
 import Button from "@/components/atoms/Button";
+import DateRangePicker from "@/components/atoms/DateRangePicker";
 import { generateWhatsAppURL } from "@/lib/whatsapp";
 import { calculateDuration } from "@/lib/utils";
 
@@ -33,6 +36,7 @@ export default function BookingForm({ carName }: BookingFormProps) {
         register,
         handleSubmit,
         watch,
+        setValue,
         formState: { errors, isSubmitting },
     } = useForm<BookingFormData>();
 
@@ -102,37 +106,39 @@ export default function BookingForm({ carName }: BookingFormProps) {
                 })}
             />
 
-            {/* Date Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input
-                    label="Tanggal Ambil"
-                    type="date"
-                    leftIcon={<CalendarDays className="w-4 h-4" />}
-                    error={errors.pickupDate?.message}
-                    {...register("pickupDate", {
-                        required: "Tanggal ambil wajib diisi",
-                        validate: (v) => {
-                            const today = new Date();
-                            today.setHours(0, 0, 0, 0);
-                            if (new Date(v) < today) return "Tidak boleh sebelum hari ini";
-                            return true;
-                        },
-                    })}
-                />
-                <Input
-                    label="Tanggal Kembali"
-                    type="date"
-                    leftIcon={<CalendarDays className="w-4 h-4" />}
-                    error={errors.returnDate?.message}
-                    {...register("returnDate", {
-                        required: "Tanggal kembali wajib diisi",
-                        validate: (v) => {
-                            if (!pickupDate) return true;
-                            if (new Date(v) <= new Date(pickupDate)) return "Harus setelah tanggal ambil";
-                            return true;
-                        },
-                    })}
-                />
+            {/* Date Range Picker */}
+            <div className="space-y-4">
+                <div className="relative">
+                    <DateRangePicker
+                        placeholder="Pilih Tanggal Ambil & Kembali"
+                        value={
+                            pickupDate && returnDate
+                                ? { from: new Date(pickupDate), to: new Date(returnDate) }
+                                : undefined
+                        }
+                        onChange={(range: DateRange | undefined) => {
+                            if (range?.from) {
+                                setValue("pickupDate", format(range.from, "yyyy-MM-dd"), { shouldValidate: true });
+                            } else {
+                                setValue("pickupDate", "");
+                            }
+                            if (range?.to) {
+                                setValue("returnDate", format(range.to, "yyyy-MM-dd"), { shouldValidate: true });
+                            } else {
+                                setValue("returnDate", "");
+                            }
+                        }}
+                    />
+                    {/* Hidden inputs to maintain form validation */}
+                    <input type="hidden" {...register("pickupDate", { required: "Tanggal ambil wajib diisi" })} />
+                    <input type="hidden" {...register("returnDate", { required: "Tanggal kembali wajib diisi" })} />
+
+                    {(errors.pickupDate || errors.returnDate) && (
+                        <p className="text-sm text-red-500 font-body mt-1">
+                            {errors.pickupDate?.message || errors.returnDate?.message}
+                        </p>
+                    )}
+                </div>
             </div>
 
             {/* Duration indicator */}

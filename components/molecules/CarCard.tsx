@@ -29,14 +29,28 @@ export default function CarCard({ car, onCompare, isCompared }: CarCardProps) {
             variants={cardItem}
             className="group bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-shadow duration-300 overflow-hidden flex flex-col"
         >
-            {/* Car Image */}
-            <Link href={`/catalog/${car.slug}`} className="block relative overflow-hidden aspect-[4/3]">
-                <motion.div whileHover={imageHover} className="w-full h-full">
+            {/* Car Image with Grid Background */}
+            <Link href={`/catalog/${car.slug}`} className="block relative overflow-hidden aspect-[4/3] bg-surface">
+                {/* Background Grid */}
+                <div
+                    className="absolute inset-0 z-0 opacity-50"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '24px 24px',
+                        maskImage: 'linear-gradient(to bottom, black 40%, transparent)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent)'
+                    }}
+                />
+
+                <motion.div whileHover={imageHover} className="absolute inset-0 flex items-center justify-center p-4 z-10 w-full h-full">
                     <Image
                         src={car.images[0]}
                         alt={`${car.name} - ${car.type} ${car.transmission}`}
                         fill
-                        className="object-cover"
+                        className="object-contain drop-shadow-xl"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                 </motion.div>
