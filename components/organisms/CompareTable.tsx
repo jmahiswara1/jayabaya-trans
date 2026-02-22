@@ -35,6 +35,7 @@ const specRows: SpecRow[] = [
     { label: "Musik", getValue: (c) => c.specs.music ? <Check className="w-4 h-4 text-green-600" /> : <X className="w-4 h-4 text-red-400" /> },
     { label: "GPS", getValue: (c) => c.specs.gps ? <Check className="w-4 h-4 text-green-600" /> : <X className="w-4 h-4 text-red-400" /> },
     { label: "USB Charger", getValue: (c) => c.specs.usbCharger ? <Check className="w-4 h-4 text-green-600" /> : <X className="w-4 h-4 text-red-400" /> },
+    { label: "Supir", getValue: (c) => (c.withDriver || c.type === "Minibus") ? <span className="text-xs font-bold text-green-600">Wajib / Termasuk</span> : <span className="text-xs text-muted">Lepas Kunci</span> },
 ];
 
 export default function CompareTable() {

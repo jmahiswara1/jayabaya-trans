@@ -12,7 +12,7 @@ import CarGrid from "@/components/organisms/CarGrid";
 import CompareBar from "@/components/organisms/CompareBar";
 import Button from "@/components/atoms/Button";
 import Skeleton from "@/components/atoms/Skeleton";
-import { cars } from "@/data/cars";
+import { cars, MAX_CAR_PRICE } from "@/data/cars";
 
 type SortOption = "price-asc" | "price-desc" | "newest" | "popular";
 
@@ -27,7 +27,7 @@ function CatalogContent() {
         transmission: searchParams.get("transmission") || "",
         capacity: searchParams.get("capacity") || "",
         minPrice: searchParams.get("minPrice") ? Number(searchParams.get("minPrice")) : 200000,
-        maxPrice: searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : 1000000,
+        maxPrice: searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : MAX_CAR_PRICE,
     };
 
     const initialSearch = searchParams.get("q") || "";
@@ -55,7 +55,7 @@ function CatalogContent() {
         if (filters.transmission) params.set("transmission", filters.transmission);
         if (filters.capacity) params.set("capacity", filters.capacity);
         if (filters.minPrice > 200000) params.set("minPrice", String(filters.minPrice));
-        if (filters.maxPrice < 1000000) params.set("maxPrice", String(filters.maxPrice));
+        if (filters.maxPrice < MAX_CAR_PRICE) params.set("maxPrice", String(filters.maxPrice));
 
         router.replace(`/katalog?${params.toString()}`, { scroll: false });
     }, [filters, searchQuery, sortBy, router]);
@@ -66,7 +66,7 @@ function CatalogContent() {
             transmission: "",
             capacity: "",
             minPrice: 200000,
-            maxPrice: 1000000,
+            maxPrice: MAX_CAR_PRICE,
         });
         setSearchQuery("");
         setSortBy("popular");

@@ -1,4 +1,4 @@
-import { Check, X, Fuel, Cog, Users, Thermometer, Radio, Map, BatteryCharging, Briefcase } from "lucide-react";
+import { Check, X, Fuel, Cog, Users, Thermometer, Radio, Map, BatteryCharging, Briefcase, UserCheck } from "lucide-react";
 import { Car } from "@/data/cars";
 
 interface CarSpecsProps {
@@ -20,6 +20,7 @@ export default function CarSpecs({ car }: CarSpecsProps) {
         { label: "Musik / Audio", value: car.specs.music, icon: Radio },
         { label: "GPS Navigation", value: car.specs.gps, icon: Map },
         { label: "USB Charger", value: car.specs.usbCharger, icon: BatteryCharging },
+        ...(car.withDriver || car.type === "Minibus" ? [{ label: "Wajib Supir", value: true, icon: UserCheck }] : []),
     ];
 
     return (

@@ -26,6 +26,7 @@ export interface Car {
     description: string;
     featured: boolean;
     popular: boolean;
+    withDriver?: boolean;
 }
 
 export const cars: Car[] = [
@@ -201,7 +202,7 @@ export const cars: Car[] = [
         transmission: "Manual",
         fuel: "Diesel",
         capacity: 14,
-        pricePerDay: 900000,
+        pricePerDay: 1200000,
         images: [
             "/images/mini-bus.png",
         ],
@@ -217,6 +218,7 @@ export const cars: Car[] = [
             "Minibus premium untuk rombongan besar. Kapasitas 14 penumpang dengan kursi nyaman. Ideal untuk trip wisata, study tour, dan acara keluarga.",
         featured: false,
         popular: false,
+        withDriver: true,
     },
     {
         id: "8",
@@ -569,6 +571,90 @@ export const cars: Car[] = [
         featured: false,
         popular: false,
     },
+    {
+        id: "21",
+        slug: "toyota-hiace-commuter",
+        name: "Toyota Hiace Commuter",
+        brand: "Toyota",
+        year: 2019,
+        type: "Minibus",
+        transmission: "Manual",
+        fuel: "Diesel",
+        capacity: 15,
+        pricePerDay: 1000000,
+        images: [
+            "/images/mini-bus.png",
+        ],
+        specs: {
+            engine: "2.5L Diesel",
+            ac: true,
+            luggage: "Sangat Besar",
+            music: true,
+            gps: false,
+            usbCharger: true,
+        },
+        description:
+            "Minibus handal untuk rombongan dengan kapasitas 15 penumpang. Hemat bahan bakar dan nyaman untuk perjalanan jauh. Wajib menggunakan supir.",
+        featured: false,
+        popular: true,
+        withDriver: true,
+    },
+    {
+        id: "22",
+        slug: "isuzu-elf-long",
+        name: "Isuzu Elf Long",
+        brand: "Isuzu",
+        year: 2021,
+        type: "Minibus",
+        transmission: "Manual",
+        fuel: "Diesel",
+        capacity: 19,
+        pricePerDay: 1300000,
+        images: [
+            "/images/mini-bus.png",
+        ],
+        specs: {
+            engine: "2.8L Diesel",
+            ac: true,
+            luggage: "Besar",
+            music: true,
+            gps: false,
+            usbCharger: true,
+        },
+        description:
+            "Microbus dengan kapasitas maksimal hingga 19 penumpang, sangat cocok untuk wisata rombongan besar. Wajib menggunakan supir.",
+        featured: true,
+        popular: true,
+        withDriver: true,
+    },
+    {
+        id: "23",
+        slug: "isuzu-elf-short",
+        name: "Isuzu Elf Short",
+        brand: "Isuzu",
+        year: 2020,
+        type: "Minibus",
+        transmission: "Manual",
+        fuel: "Diesel",
+        capacity: 15,
+        pricePerDay: 1100000,
+        images: [
+            "/images/mini-bus.png",
+        ],
+        specs: {
+            engine: "2.8L Diesel",
+            ac: true,
+            luggage: "Sedang",
+            music: true,
+            gps: false,
+            usbCharger: true,
+        },
+        description:
+            "Microbus elf versi short, tangguh untuk medan menanjak dan kapasitas 15 penumpang. Wajib menggunakan supir.",
+        featured: false,
+        popular: false,
+        withDriver: true,
+    },
 ];
 
 /**
@@ -600,3 +686,8 @@ export function getRelatedCars(currentId: string, type: string, limit: number = 
 export function getCarTypes(): string[] {
     return Array.from(new Set(cars.map((car) => car.type)));
 }
+
+/**
+ * The maximum price per day amongst all cars
+ */
+export const MAX_CAR_PRICE = Math.max(...cars.map(c => c.pricePerDay));

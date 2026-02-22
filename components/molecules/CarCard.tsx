@@ -69,9 +69,12 @@ export default function CarCard({ car, onCompare, isCompared }: CarCardProps) {
                             {car.name}
                         </h3>
                     </Link>
-                    <div className="flex items-center gap-2 mt-1.5">
+                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
                         <Badge variant="transmission">{car.transmission}</Badge>
                         <Badge variant="fuel">{car.fuel}</Badge>
+                        {(car.withDriver || car.type === "Minibus") && (
+                            <Badge variant="driver">Wajib Supir</Badge>
+                        )}
                     </div>
                 </div>
 

@@ -11,6 +11,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CAR_TYPES, TRANSMISSIONS, CAPACITY_OPTIONS } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
+import { MAX_CAR_PRICE } from "@/data/cars";
 
 interface FilterState {
     type: string[];
@@ -28,7 +29,7 @@ interface FilterBarProps {
 }
 
 const MIN_PRICE = 200000;
-const MAX_PRICE = 1000000;
+const MAX_PRICE = MAX_CAR_PRICE;
 const PRICE_STEP = 50000;
 
 export default function FilterBar({
@@ -137,7 +138,7 @@ export default function FilterBar({
                                     : "bg-white text-charcoal border-gray-200 hover:border-primary hover:text-primary"
                             )}
                         >
-                            {cap} Kursi
+                            {cap === 14 ? "14+" : cap} Kursi
                         </button>
                     ))}
                 </div>
@@ -191,7 +192,7 @@ export default function FilterBar({
                         )}
                         {filters.capacity && (
                             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-primary/10 text-primary rounded-full">
-                                {filters.capacity} Kursi
+                                {filters.capacity === "14" ? "14+" : filters.capacity} Kursi
                                 <X
                                     className="w-3 h-3 cursor-pointer"
                                     onClick={() => updateFilter("capacity", "")}

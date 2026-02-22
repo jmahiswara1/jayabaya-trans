@@ -69,6 +69,9 @@ export default function CarDetailPage({ params }: CarDetailProps) {
                             <div className="flex flex-wrap gap-2 mb-3">
                                 <Badge variant="type">{car.type}</Badge>
                                 <Badge variant="transmission">{car.transmission}</Badge>
+                                {(car.withDriver || car.type === "Minibus") && (
+                                    <Badge variant="driver">Wajib Supir</Badge>
+                                )}
                             </div>
                             <h1 className="text-2xl font-bold font-heading text-charcoal mb-2">{car.name}</h1>
                             <p className="text-primary font-bold text-xl">
@@ -103,6 +106,9 @@ export default function CarDetailPage({ params }: CarDetailProps) {
                                     <Badge variant="type">{car.type}</Badge>
                                     <Badge variant="transmission">{car.transmission}</Badge>
                                     <Badge variant="fuel">{car.fuel}</Badge>
+                                    {(car.withDriver || car.type === "Minibus") && (
+                                        <Badge variant="driver">Wajib Supir</Badge>
+                                    )}
                                 </div>
                                 <h1 className="text-3xl font-bold font-heading text-charcoal mb-2">{car.name}</h1>
                                 <div className="flex items-end gap-2 mb-6">
