@@ -99,6 +99,15 @@ function CatalogContent() {
                 return true;
             })
             .sort((a, b) => {
+                // Priority: Exact capacity match
+                if (filters.capacity) {
+                    const targetCap = Number(filters.capacity);
+                    const aExact = a.capacity === targetCap;
+                    const bExact = b.capacity === targetCap;
+                    if (aExact && !bExact) return -1;
+                    if (!aExact && bExact) return 1;
+                }
+
                 switch (sortBy) {
                     case "price-asc":
                         return a.pricePerDay - b.pricePerDay;
