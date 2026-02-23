@@ -1,114 +1,147 @@
-# Jayabaya Trans
+# Jayabaya Trans — Modern Car Rental Platform
 
-Website sewa mobil modern untuk **Jayabaya Trans**, penyedia jasa rental kendaraan yang berlokasi di Pare, Kabupaten Kediri, Jawa Timur. Dibangun sebagai aplikasi frontend-only berbasis Next.js dengan fokus pada performa, SEO, dan kemudahan pemesanan melalui WhatsApp.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deploy-black?style=for-the-badge&logo=vercel)
+
+**Jayabaya Trans** adalah proyek pengembangan aplikasi web penyewaan mobil yang berfokus pada kecepatan, SEO, dan pengalaman pengguna yang intuitif. Terinspirasi oleh kebutuhan transportasi di wilayah Pare (Kampung Inggris) dan Kediri, proyek ini mensimulasikan platform *real-world* dengan integrasi pemesanan WhatsApp.
+
+> **Portfolio Note:** Proyek ini adalah sebuah **Studi Kasus & Proyek Portofolio** untuk mendemonstrasikan kemampuan pengembangan *frontend* modern. Ini bukan layanan bisnis operasional yang asli.
 
 ---
 
-## Deskripsi
+## Preview
 
-Jayabaya Trans hadir untuk mempermudah masyarakat, wisatawan, pelajar Kampung Inggris, dan pelaku bisnis lokal dalam menemukan dan memesan kendaraan sewa yang sesuai kebutuhan. Proses pemesanan dilakukan sepenuhnya melalui WhatsApp tanpa memerlukan akun atau login.
+[Jayabaya Trans](https://jayabayatrans.vercel.app)
+
+---
+
+## Keunggulan Teknis
+
+Dalam membangun proyek ini, saya berfokus pada tiga pilar utama pengembangan web:
+
+**Performa Maksimal**
+Menggunakan Next.js 14 App Router dengan Static Site Generation (SSG) untuk memastikan waktu muat yang instan.
+
+**Scalable Architecture**
+Menerapkan pola Atomic Design untuk memisahkan komponen menjadi unit terkecil (Atoms) hingga organisme kompleks, memudahkan *maintenance* dan *reusability*.
+
+**SEO & Accessibility**
+Optimasi metadata dinamis untuk setiap halaman dan struktur HTML semantik untuk aksesibilitas yang lebih baik.
 
 ---
 
 ## Tech Stack
 
 | Layer | Teknologi |
-|---|---|
-| Framework | Next.js 14 (App Router, SSG) |
-| Bahasa | TypeScript |
+| :--- | :--- |
+| Frontend Framework | Next.js 14 (App Router) |
+| Programming Language | TypeScript |
 | Styling | Tailwind CSS v3 |
-| Animasi | Framer Motion |
-| Ikon | Lucide React |
-| Gambar | Next/Image + Unsplash |
-| Form | React Hook Form |
-| State Global | Zustand (fitur bandingkan mobil) |
-| Font | Plus Jakarta Sans + Inter (Google Fonts) |
-| Deploy | Vercel |
+| Animation | Framer Motion |
+| Icons | Lucide React |
+| State Management | Zustand |
+| Form Handling | React Hook Form |
+| Deployment | Vercel |
 
 ---
 
-## Fitur
+## Fitur Utama
 
-### Halaman
+### Katalog Kendaraan Dinamis
 
-- **Beranda** — Hero section, keunggulan layanan, cara sewa, testimoni, dan CTA
-- **Katalog (`/katalog`)** — Daftar 20 kendaraan dengan filter tipe/transmisi/kapasitas, pencarian, dan pengurutan
-- **Detail Mobil (`/katalog/[slug]`)** — Galeri foto, spesifikasi lengkap, form pemesanan terintegrasi WA
-- **Bandingkan (`/perbandingan`)** — Pilih hingga 3 mobil, bandingkan spesifikasi secara berdampingan
-- **Pemesanan (`/booking`)** — Form pemesanan lengkap, dikirim otomatis ke WhatsApp
-- **Tentang Kami (`/about`)** — Sejarah, statistik, dan keunggulan layanan
-- **FAQ (`/faq`)** — Pertanyaan umum dengan navigasi per kategori
-- **Kontak (`/kontak`)** — Informasi kontak, embed Google Maps, dan form pesan cepat
-- **Promo (`/promo`)** — Paket sewa spesial dengan harga dan detail layanan
-- **Area Layanan (`/area-layanan`)** — Kota yang dilayani, biaya antar luar kota, destinasi populer
-- **Syarat dan Ketentuan (`/syarat-ketentuan`)** — Dokumen yang diperlukan, aturan, pembayaran, dan denda
+Sistem filter canggih berdasarkan tipe (MPV, City Car, SUV), jenis transmisi, dan kapasitas penumpang yang terintegrasi dengan URL parameters.
 
-### Teknis
+### Fitur Perbandingan (Compare Tool)
 
-- Seluruh halaman di-render secara statis (SSG) untuk performa optimal
-- SEO metadata per halaman (title, description, Open Graph)
-- Desain responsif untuk mobile, tablet, dan desktop
-- Animasi halus menggunakan Framer Motion
-- Integrasi WhatsApp dengan pesan terformat otomatis
-- URL parameter untuk filter katalog yang dapat dibagikan
-- Komponen mengikuti pola Atomic Design
+Pengguna dapat memilih hingga 3 unit kendaraan untuk dibandingkan spesifikasinya secara *side-by-side*. Fitur ini dikelola menggunakan Zustand untuk manajemen *state* global yang ringan.
+
+### Smart Booking via WhatsApp
+
+Form pemesanan yang divalidasi dengan React Hook Form, yang kemudian secara otomatis menghasilkan pesan terformat rapi untuk dikirimkan ke WhatsApp Admin tanpa memerlukan database backend.
+
+### Detail Kendaraan Berbasis SEO
+
+Setiap unit memiliki halaman detailnya sendiri (`/katalog/[slug]`) dengan metadata yang dioptimasi untuk mesin pencari.
 
 ---
 
-## Struktur Proyek
+## Struktur Folder
 
-```
+```text
 app/
-  (route pages)/
+├── (pages)/          # Seluruh route utama (Home, Catalog, Booking, dsb)
+└── layout.tsx        # Root layout & Provider
+
 components/
-  atoms/
-  molecules/
-  organisms/
-  layout/
+├── atoms/            # Button, Input, Badge, Logo
+├── molecules/        # Card Item, Filter Group, FAQ Item
+├── organisms/        # Navbar, Footer, Comparison Table, Hero Section
+└── layout/           # Section wrappers
+
 data/
-  cars.ts
-  faq.ts
-  promos.ts
+├── cars.ts           # Data statis armada kendaraan
+├── promos.ts         # Data paket promo
+└── faq.ts            # Konten FAQ
+
 lib/
-  animations.ts
-  compareStore.ts
-  constants.ts
-  utils.ts
-  whatsapp.ts
-public/
-  images/
+├── store/            # Zustand store logic
+├── utils/            # Helper functions (WhatsApp formatter, currency)
+└── constants.ts      # Config & constant values
 ```
 
 ---
 
-## Menjalankan Secara Lokal
+## Instalasi Lokal
+
+Clone repositori:
 
 ```bash
-# Install dependensi
-npm install
-
-# Jalankan development server
-npm run dev
-
-# Build production
-npm run build
+git clone https://github.com/gadangmahiswara/jayabaya-trans.git
 ```
 
-Buka [http://localhost:3000](http://localhost:3000) di browser.
+Masuk ke direktori:
+
+```bash
+cd jayabaya-trans
+```
+
+Install dependensi:
+
+```bash
+npm install
+```
+
+Jalankan server pengembangan:
+
+```bash
+npm run dev
+```
+
+Akses melalui `http://localhost:3000`.
 
 ---
 
 ## Pengembangan Selanjutnya
 
-- Integrasi backend untuk manajemen armada dan pemesanan
-- Panel admin untuk memperbarui data kendaraan, promo, dan area
-- Notifikasi otomatis via WhatsApp Business API
-- Halaman ulasan pelanggan dengan integrasi Google Reviews
-- Pelacakan ketersediaan unit secara real-time
-- Progressive Web App (PWA) untuk pengalaman mobile yang lebih baik
+- [ ] Integrasi CMS (Sanity/Contentful) untuk manajemen data mobil secara dinamis.
+- [ ] Implementasi PWA (Progressive Web App) agar dapat diinstal di perangkat mobile.
+- [ ] Penambahan fitur ulasan pelanggan yang terhubung ke Google Maps API.
 
 ---
 
-## Lisensi
+## Profil Pengembang
 
-Proyek ini dikembangkan untuk keperluan internal Jayabaya Trans. Seluruh hak cipta dilindungi.
+**Gadang Jatu Mahiswara**
+Informatics Engineering Student — Universitas Negeri Surabaya
+
+Saya adalah seorang pengembang web yang antusias dengan ekosistem React dan desain UI/UX. Saat ini sedang aktif mencari peluang magang atau posisi Junior Full-stack/Frontend Developer.
+
+- **LinkedIn:** [linkedin.com/in/gadangmahiswara](https://linkedin.com/in/gadangmahiswara)
+- **Portfolio:** [jmahiswara.my.id](https://jmahiswara.my.id)
+- **Email:** gadangjatumahiswara@gmail.com
+
+---
+
+© 2026 Gadang Jatu Mahiswara. Built with passion for web development.
